@@ -8,7 +8,7 @@ import java.awt.*;
  * @author Nino
  * @date 2020-05-20 17:03
  */
-public class Explode extends BaseExPlode {
+public class Explode {
 
     public static final int WIDTH  = ResourceMgr.explodes[0].getWidth();
     public static final int HEIGHT  = ResourceMgr.explodes[0].getHeight();
@@ -30,7 +30,7 @@ public class Explode extends BaseExPlode {
         //new Audio( "audio/explode.wav" ).play();
     }
 
-    @Override
+
     public void paint(Graphics g){
         g.drawImage( ResourceMgr.explodes[step++],x,y,null );
         if(step>=ResourceMgr.explodes.length){

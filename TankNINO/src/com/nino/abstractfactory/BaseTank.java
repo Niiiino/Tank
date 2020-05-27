@@ -9,14 +9,16 @@ import java.awt.*;
  * @date 2020-05-27 10:26
  */
 public abstract class BaseTank {
+
     public Group group = Group.BAD;
     public Rectangle rect = new Rectangle();
 
+
     public abstract void paint(Graphics g);
 
-    public  Group getGroup(){
-        return this.group;
-    };
+    public Group getGroup() {
+        return group;
+    }
 
     public abstract void die();
 

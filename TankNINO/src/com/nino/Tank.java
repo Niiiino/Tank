@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Nino
  * @date 2020-05-20 15:58
  */
-public class Tank extends BaseTank {
+public class Tank {
     int x,y;
     Dir dir = Dir.DOWN;
     private static final int speed = 5;
@@ -18,7 +18,8 @@ public class Tank extends BaseTank {
     private boolean live = true;
     private Random random = new Random();
     FireStrategy fs;
-
+    public Group group = Group.BAD;
+    public Rectangle rect = new Rectangle();
 
     public Group getGroup() {
         return group;
@@ -194,7 +195,7 @@ public class Tank extends BaseTank {
         int by = this.y+Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.tf.gf.createBullet(bx,by,dir,this.group,this.tf );
+            this.tf.bullets.add(new Bullet(bx,by,dir,this.group,this.tf ));
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{

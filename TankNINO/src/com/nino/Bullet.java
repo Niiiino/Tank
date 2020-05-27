@@ -9,7 +9,7 @@ import java.awt.*;
  * @author Nino
  * @date 2020-05-20 17:03
  */
-public class Bullet extends BaseBullet {
+public class Bullet {
 
     private static final int speed = 30;
     public static final int WIDTH  = ResourceMgr.bulletU.getWidth();
@@ -92,7 +92,7 @@ public class Bullet extends BaseBullet {
 
     }
 
-    public void collidewith(BaseTank tank) {
+    public void collidewith(Tank tank) {
 
         //检查是否是友军
         if (this.group == tank.getGroup()){
@@ -106,7 +106,7 @@ public class Bullet extends BaseBullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add( tf.gf.createExplode( ex,ey,tf ) );
+            tf.explodes.add( new Explode( ex,ey,tf ) );
         }
 
     }

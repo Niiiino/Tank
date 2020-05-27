@@ -40,7 +40,7 @@ public class ReactBullect extends BaseBullet {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        tf.bullets.add( this );
+        tf.bullets.add( new Bullet( x,y,dir,group,tf ) );
     }
 
     public void paint(Graphics g){
@@ -111,7 +111,7 @@ public class ReactBullect extends BaseBullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add( tf.gf.createExplode( ex,ey,tf ) );
+            tf.explodes.add( new Explode( ex,ey,tf ));
         }
 
     }
