@@ -1,5 +1,6 @@
 package com.nino.abstractfactory;
 
+import com.nino.GameModel;
 import com.nino.ResourceMgr;
 import com.nino.TankFrame;
 
@@ -18,14 +19,14 @@ public class ReactExplode extends BaseExPlode {
 
     //private boolean live = true;
 
-    TankFrame tf = null;
+    GameModel gm = null;
 
     private int step = 0;
 
-    public ReactExplode(int x, int y, TankFrame tf) {
+    public ReactExplode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
 
         //¿ªÆô±¬Õ¨Éù
         //new Audio( "audio/explode.wav" ).play();
@@ -41,7 +42,7 @@ public class ReactExplode extends BaseExPlode {
         step++;
 
         if(step>=5){
-            tf.explodes.remove( this );
+            gm.explodes.remove( this );
         }
 
         g.setColor( c );

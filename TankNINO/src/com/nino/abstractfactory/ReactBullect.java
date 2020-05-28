@@ -19,7 +19,7 @@ public class ReactBullect extends BaseBullet {
     private int x,y;
     private Dir dir;
     private boolean live = true;
-    TankFrame tf = null;
+    GameModel gm;
     private Group group =Group.BAD;
 
     public Group getGroup() {
@@ -30,23 +30,23 @@ public class ReactBullect extends BaseBullet {
         this.group = group;
     }
 
-    public ReactBullect(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public ReactBullect(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        tf.bullets.add( new Bullet( x,y,dir,group,tf ) );
+        gm.bullets.add( new Bullet( x,y,dir,group,gm ) );
     }
 
     public void paint(Graphics g){
 
         if (!live){
-            tf.bullets.remove( this );
+            gm.bullets.remove( this );
         }
 
         /*if(dir == Dir.LEFT){
@@ -111,7 +111,7 @@ public class ReactBullect extends BaseBullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add( new Explode( ex,ey,tf ));
+            gm.explodes.add( new Explode( ex,ey,gm ));
         }
 
     }

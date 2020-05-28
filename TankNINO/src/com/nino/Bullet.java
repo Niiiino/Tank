@@ -20,7 +20,7 @@ public class Bullet {
     private int x,y;
     private Dir dir;
     private boolean live = true;
-    TankFrame tf = null;
+        GameModel gm = null;
     private Group group =Group.BAD;
 
     public Group getGroup() {
@@ -31,23 +31,23 @@ public class Bullet {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        tf.bullets.add( this );
+        gm.bullets.add( this );
     }
 
     public void paint(Graphics g){
 
         if (!live){
-            tf.bullets.remove( this );
+            gm.bullets.remove( this );
         }
 
         if(dir == Dir.LEFT){
@@ -106,7 +106,7 @@ public class Bullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            tf.explodes.add( new Explode( ex,ey,tf ) );
+            gm.explodes.add( new Explode( ex,ey,gm ) );
         }
 
     }

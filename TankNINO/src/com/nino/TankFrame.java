@@ -16,11 +16,7 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank( 200,400,Dir.UP,Group.GOOD,this);
-    public List<Bullet> bullets = new ArrayList<>();
-    public List<Tank> tanks = new ArrayList<>();
-    public List<Explode> explodes = new ArrayList<>();
-
+    GameModel gm =new GameModel();
 
     public static final int GAME_WIDTH = 960,GAME_HEIGHT = 680;
 
@@ -58,32 +54,8 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor( Color.WHITE );
-        g.drawString( "子弹的数量"+ bullets.size(),10,60 );
-        g.drawString( "敌人的数量"+ tanks.size(),10,80);
-        g.drawString( "爆炸的数量"+ explodes.size(),10,100);
-        g.setColor( c );
 
-        myTank.paint(g);
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get( i ).paint( g );
-        }
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get( i ).paint( g );
-        }
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get( i ).paint( g );
-        }
-
-
-        //碰撞检测
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get( i ).collidewith(tanks.get( j ));
-            }
-        }
-
+        gm.paint( g );
 
         }
 
@@ -160,13 +132,15 @@ public class TankFrame extends Frame {
                 bD = false;
             }
             if(key == KeyEvent.VK_SPACE){
-                myTank.fire();
+                gm.GetMyTank().fire();
             }
             setMyTankDir();
             }
 
 
         private void setMyTankDir() {
+
+            Tank myTank = gm.GetMyTank();
 
             if(!bL && !bD && !bR && !bU){
                 myTank.setMoving( false );

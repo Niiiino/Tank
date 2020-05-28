@@ -14,7 +14,7 @@ public class ReactTank extends BaseTank {
     Dir dir = Dir.DOWN;
     private static final int speed = 5;
     private boolean moving = true;
-    TankFrame tf = null;
+    GameModel gm;
     private boolean live = true;
     private Random random = new Random();
     Group group = Group.BAD;
@@ -69,12 +69,12 @@ public class ReactTank extends BaseTank {
         return speed;
     }
 
-    public ReactTank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public ReactTank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
@@ -109,7 +109,7 @@ public class ReactTank extends BaseTank {
     public void paint(Graphics g) {
 
         if(!live){
-            tf.tanks.remove( this );
+            gm.tanks.remove( this );
         }
 
        /* if(dir == Dir.LEFT){
@@ -200,7 +200,7 @@ public class ReactTank extends BaseTank {
         int by = this.y+ ReactTank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.tf.bullets.add((new Bullet( bx,by,dir,this.group,this.tf )) );
+            this.gm.bullets.add((new Bullet( bx,by,dir,this.group,this.gm )) );
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{
