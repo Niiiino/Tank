@@ -40,14 +40,14 @@ public class ReactBullect extends BaseBullet {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        gm.bullets.add( new Bullet( x,y,dir,group,gm ) );
+        gm.add( new Bullet( x,y,dir,group,gm ) );
     }
 
     public void paint(Graphics g){
 
-        if (!live){
-            gm.bullets.remove( this );
-        }
+       /* if (!live){
+            gm.remove( this);
+        }*/
 
         /*if(dir == Dir.LEFT){
             g.drawImage( ResourceMgr.bulletL,x,y,null );
@@ -111,7 +111,7 @@ public class ReactBullect extends BaseBullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.explodes.add( new Explode( ex,ey,gm ));
+            gm.add( new Explode( ex,ey,gm ));
         }
 
     }

@@ -1,7 +1,5 @@
 package com.nino;
 
-import com.nino.abstractfactory.BaseTank;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -9,8 +7,9 @@ import java.util.Random;
  * @author Nino
  * @date 2020-05-20 15:58
  */
-public class Tank {
+public class Tank extends GameObject {
     int x,y;
+    int oldx,oldy;
     Dir dir = Dir.DOWN;
     private static final int speed = 5;
     private boolean moving = true;
@@ -20,6 +19,14 @@ public class Tank {
     FireStrategy fs;
     public Group group = Group.BAD;
     public Rectangle rect = new Rectangle();
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
 
     public Group getGroup() {
         return group;
@@ -108,7 +115,7 @@ public class Tank {
     public void paint(Graphics g) {
 
         if(!live){
-            gm.tanks.remove( this );
+            gm.remove( this );
         }
 
         if(dir == Dir.LEFT){
@@ -129,6 +136,8 @@ public class Tank {
     }
 
     private void move() {
+        oldx =x;
+        oldy =y;
         if(!moving) return;
         /*switch (dir){
             case LEFT:
@@ -195,7 +204,7 @@ public class Tank {
         int by = this.y+Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.gm.bullets.add(new Bullet(bx,by,dir,this.group,this.gm ));
+            this.gm.add(new Bullet(bx,by,dir,this.group,this.gm ));
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{
@@ -206,5 +215,32 @@ public class Tank {
 
     public void die() {
         live = false;
+    }
+    public void turn(){
+        if(dir == Dir.LEFT){
+
+            dir = Dir.RIGHT;
+
+        }
+        if(dir == Dir.RIGHT){
+
+            dir = Dir.LEFT;
+
+        }
+        if(dir == Dir.UP){
+
+            dir = Dir.DOWN;
+
+        }
+        if(dir == Dir.DOWN){
+
+            dir = Dir.UP;
+
+        }
+    }
+
+    public void timereturn(){
+        this.x = oldx;
+        this.y =oldy;
     }
 }

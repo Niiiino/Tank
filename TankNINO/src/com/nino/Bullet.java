@@ -1,15 +1,12 @@
 package com.nino;
 
-import com.nino.abstractfactory.BaseBullet;
-import com.nino.abstractfactory.BaseTank;
-
 import java.awt.*;
 
 /**
  * @author Nino
  * @date 2020-05-20 17:03
  */
-public class Bullet {
+public class Bullet extends GameObject {
 
     private static final int speed = 30;
     public static final int WIDTH  = ResourceMgr.bulletU.getWidth();
@@ -17,10 +14,35 @@ public class Bullet {
 
     Rectangle rect = new Rectangle();
 
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
+
     private int x,y;
     private Dir dir;
     private boolean live = true;
         GameModel gm = null;
+
+    public GameModel getGm() {
+        return gm;
+    }
+
+    public void setGm(GameModel gm) {
+        this.gm = gm;
+    }
+
     private Group group =Group.BAD;
 
     public Group getGroup() {
@@ -41,13 +63,13 @@ public class Bullet {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        gm.bullets.add( this );
+        gm.add( this );
     }
 
     public void paint(Graphics g){
 
         if (!live){
-            gm.bullets.remove( this );
+            gm.remove( this );
         }
 
         if(dir == Dir.LEFT){
@@ -92,11 +114,11 @@ public class Bullet {
 
     }
 
-    public void collidewith(Tank tank) {
+   /* public boolean collidewith(Tank tank) {
 
         //检查是否是友军
         if (this.group == tank.getGroup()){
-            return;
+            return false;
         }
 
 
@@ -106,10 +128,11 @@ public class Bullet {
             this.die();
             int ex = tank.getX()+Tank.WIDTH/2 - Explode.WIDTH/2;
             int ey = tank.getY()+Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.explodes.add( new Explode( ex,ey,gm ) );
+            gm.add( new Explode( ex,ey,gm ) );
+            return true;
         }
-
-    }
+            return false;
+    }*/
 
     private void die() {
         live = false;

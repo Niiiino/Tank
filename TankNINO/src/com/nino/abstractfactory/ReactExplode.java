@@ -42,7 +42,7 @@ public class ReactExplode extends BaseExPlode {
         step++;
 
         if(step>=5){
-            gm.explodes.remove( this );
+            gm.remove( this.gm.GetMyTank() );
         }
 
         g.setColor( c );
