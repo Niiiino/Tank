@@ -1,5 +1,8 @@
 package com.nino;
 
+import com.nino.decorator.RectDecorator;
+import com.nino.decorator.TailDecorator;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -8,7 +11,6 @@ import java.util.Random;
  * @date 2020-05-20 15:58
  */
 public class Tank extends GameObject {
-    int x,y;
     int oldx,oldy;
     Dir dir = Dir.DOWN;
     private static final int speed = 5;
@@ -135,6 +137,16 @@ public class Tank extends GameObject {
 
     }
 
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
+
     private void move() {
         //记录移动之前的位置
         oldx =x;
@@ -205,7 +217,7 @@ public class Tank extends GameObject {
         int by = this.y+Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bx,by,dir,this.group);
+            GameModel.getInstance().add( new RectDecorator(new TailDecorator(new Bullet(bx,by,dir,this.group))) );
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{

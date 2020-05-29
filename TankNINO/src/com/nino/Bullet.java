@@ -30,7 +30,7 @@ public class Bullet extends GameObject {
         this.rect = rect;
     }
 
-    private int x,y;
+
     private Dir dir;
     private boolean live = true;
         GameModel gm = GameModel.getInstance();
@@ -85,6 +85,16 @@ public class Bullet extends GameObject {
         }
 
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
 
