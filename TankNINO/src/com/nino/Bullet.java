@@ -33,7 +33,7 @@ public class Bullet extends GameObject {
     private int x,y;
     private Dir dir;
     private boolean live = true;
-        GameModel gm = null;
+        GameModel gm = GameModel.getInstance();
 
     public GameModel getGm() {
         return gm;
@@ -53,23 +53,22 @@ public class Bullet extends GameObject {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-        gm.add( this );
+        GameModel.getInstance().add( this );
     }
 
     public void paint(Graphics g){
 
         if (!live){
-            gm.remove( this );
+            GameModel.getInstance().remove( this );
         }
 
         if(dir == Dir.LEFT){

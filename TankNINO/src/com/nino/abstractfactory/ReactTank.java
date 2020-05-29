@@ -200,7 +200,7 @@ public class ReactTank extends BaseTank {
         int by = this.y+ ReactTank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.gm.add((new Bullet( bx,by,dir,this.group,this.gm )) );
+            this.gm.add((new Bullet( bx,by,dir,this.group)) );
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{

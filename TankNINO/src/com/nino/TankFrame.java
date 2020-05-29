@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    GameModel gm =new GameModel();
+    GameModel gm = GameModel.getInstance();
 
     public static final int GAME_WIDTH = 960,GAME_HEIGHT = 680;
 
@@ -140,7 +140,7 @@ public class TankFrame extends Frame {
 
         private void setMyTankDir() {
 
-            Tank myTank = gm.GetMyTank();
+            Tank myTank = GameModel.getInstance().GetMyTank();
 
             if(!bL && !bD && !bR && !bU){
                 myTank.setMoving( false );

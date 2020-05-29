@@ -13,7 +13,6 @@ public class Tank extends GameObject {
     Dir dir = Dir.DOWN;
     private static final int speed = 5;
     private boolean moving = true;
-    GameModel gm = null;
     private boolean live = true;
     private Random random = new Random();
     FireStrategy fs;
@@ -75,12 +74,11 @@ public class Tank extends GameObject {
         return speed;
     }
 
-    public Tank(int x, int y, Dir dir,Group group,GameModel gm) {
+    public Tank(int x, int y, Dir dir,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
@@ -96,6 +94,8 @@ public class Tank extends GameObject {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
+            GameModel.getInstance().add( this );
         }
         else{
             String badFSName = PropertyMgr.get( "badFS" );
@@ -115,7 +115,7 @@ public class Tank extends GameObject {
     public void paint(Graphics g) {
 
         if(!live){
-            gm.remove( this );
+            GameModel.getInstance().remove( this );
         }
 
         if(dir == Dir.LEFT){
@@ -136,6 +136,7 @@ public class Tank extends GameObject {
     }
 
     private void move() {
+        //记录移动之前的位置
         oldx =x;
         oldy =y;
         if(!moving) return;
@@ -204,7 +205,7 @@ public class Tank extends GameObject {
         int by = this.y+Tank.HEIGHT/2 - Bullet.HEIGHT/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            this.gm.add(new Bullet(bx,by,dir,this.group,this.gm ));
+            new Bullet(bx,by,dir,this.group);
         }
          if (this.group == Group.GOOD){
             new Thread(() ->{
@@ -239,6 +240,7 @@ public class Tank extends GameObject {
         }
     }
 
+    //两级反转，回到过去
     public void timereturn(){
         this.x = oldx;
         this.y =oldy;
