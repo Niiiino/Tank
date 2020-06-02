@@ -1,5 +1,5 @@
 #tanks count at initialization
-initTankCount=10
+initTankCount=6
 #fireStrategy
 goodFS = com.nino.FourDirFireStrategy
 badFS = com.nino.DefaultFireStrategy

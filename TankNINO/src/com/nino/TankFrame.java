@@ -132,7 +132,7 @@ public class TankFrame extends Frame {
                 bD = false;
             }
             if(key == KeyEvent.VK_SPACE){
-                gm.GetMyTank().fire();
+                gm.GetMyTank().handleFireKey();
             }
             setMyTankDir();
             }

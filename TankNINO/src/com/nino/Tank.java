@@ -4,6 +4,9 @@ import com.nino.decorator.RectDecorator;
 import com.nino.decorator.TailDecorator;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -256,5 +259,14 @@ public class Tank extends GameObject {
     public void timereturn(){
         this.x = oldx;
         this.y =oldy;
+    }
+
+     List<TankFireObserver> fireObservers = Arrays.asList( new TankFireHandler() );
+
+    public void handleFireKey(){
+        TankFireEvent event =new TankFireEvent( this );
+        for (TankFireObserver o : fireObservers) {
+            o.actionOnFire( event );
+        }
     }
 }
