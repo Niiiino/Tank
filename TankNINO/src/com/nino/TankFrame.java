@@ -134,6 +134,12 @@ public class TankFrame extends Frame {
             if(key == KeyEvent.VK_SPACE){
                 gm.GetMyTank().handleFireKey();
             }
+            if(key == KeyEvent.VK_S){
+                gm.save();
+            }
+            if(key == KeyEvent.VK_L){
+                gm.load();
+            }
             setMyTankDir();
             }
 
